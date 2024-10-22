@@ -7,7 +7,6 @@ const options = {
     // 'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
     'x-cg-demo-api-key': 'CG-BNWsJcCt2x5LYzgoPgW5JNgu',
   },
-  mode: 'no-cors',
 }
 export function useFetch() {
   const router = useRouter()
