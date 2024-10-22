@@ -41,7 +41,7 @@ function changeNavTopic(e) {
 <template>
   <main :class="mode === 'dark' ? 'details dark' : 'details'">
     <div
-      v-if="!isLoading"
+      v-if="currencyDetails"
       :class="
         mode == 'dark' ? 'btn btn-sm mt-4 mb-2 dark' : 'btn btn-sm mt-4 mb-2'
       "
@@ -55,7 +55,7 @@ function changeNavTopic(e) {
       </p>
     </div>
 
-    <div v-if="isLoading" class="w-100 d-flex justify-content-center">
+    <div v-if="!currencyDetails" class="w-100 d-flex justify-content-center">
       <div
         :class="
           mode == 'dark'
@@ -67,184 +67,197 @@ function changeNavTopic(e) {
     </div>
 
     <section v-else class="m-5">
-      <div class="d-flex flex-wrap align-items-center justify-content-between">
+      <div v-if="currencyDetails">
         <div
-          class="coinHeader d-flex flex-wrap align-items-center justify-content-center"
+          class="d-flex flex-wrap align-items-center justify-content-between"
         >
-          <div class="">
-            <img
-              :alt="`${currencyDetails.name} Logo`"
-              :src="currencyDetails.image.large"
-              height="200px"
-            />
-          </div>
-          <div class="">
-            <div>
-              <p class="fw-bolder coinName mb-0">{{ currencyDetails.name }}</p>
-              <p class="coinCode">{{ currencyDetails.symbol.toUpperCase() }}</p>
+          <div
+            class="coinHeader d-flex flex-wrap align-items-center justify-content-center"
+          >
+            <div class="">
+              <img
+                :alt="`${currencyDetails.name} Logo`"
+                :src="currencyDetails.image.large"
+                height="200px"
+              />
+            </div>
+            <div class="">
+              <div>
+                <p class="fw-bolder coinName mb-0">
+                  {{ currencyDetails.name }}
+                </p>
+                <p class="coinCode">
+                  {{ currencyDetails.symbol.toUpperCase() }}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="d-flex flex-wrap justify-content-center coinPrice">
-          <h1>
-            ${{
-              currencyDetails.market_data.current_price.usd.toLocaleString(
-                'en-US',
-              )
-            }}
-          </h1>
-          <span
-            :class="
-              currencyDetails.market_data.price_change_percentage_24h > 0
-                ? 'coinStat d-flex align-items-center justify-content-center text-success'
-                : currencyDetails.market_data.price_change_percentage_24h < 0
-                  ? 'coinStat d-flex align-items-center justify-content-center text-danger'
-                  : 'coinStat d-flex align-items-center justify-content-center text-secondary'
-            "
-          >
-            <i
+          <div class="d-flex flex-wrap justify-content-center coinPrice">
+            <h1>
+              ${{
+                currencyDetails.market_data.current_price.usd.toLocaleString(
+                  'en-US',
+                )
+              }}
+            </h1>
+            <span
               :class="
                 currencyDetails.market_data.price_change_percentage_24h > 0
-                  ? 'bx bxs-up-arrow'
+                  ? 'coinStat d-flex align-items-center justify-content-center text-success'
                   : currencyDetails.market_data.price_change_percentage_24h < 0
-                    ? 'bx bxs-down-arrow'
-                    : 'bx bx-minus'
-              "
-            ></i>
-            <span class="mx-2"
-              >{{
-                Math.abs(
-                  currencyDetails.market_data.price_change_percentage_24h,
-                )
-              }}% (24h)</span
-            ></span
-          >
-        </div>
-        <div class="d-flex justify-content-center gap-4 text-center mt-2 w-100">
-          <p class="fw-bolder mx-3">
-            All Time Low:
-            <span
-              >${{
-                currencyDetails.market_data.atl.usd.toLocaleString('en-US')
-              }}
-              <br />
-              ({{
-                new Date(
-                  currencyDetails.market_data.atl_date.usd,
-                ).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                })
-              }})</span
-            >
-            <span
-              :class="
-                currencyDetails.market_data.atl_change_percentage.usd > 0
-                  ? 'd-flex align-items-center justify-content-center text-success'
-                  : currencyDetails.market_data.atl_change_percentage.usd < 0
-                    ? 'd-flex align-items-center justify-content-center text-danger'
-                    : 'd-flex align-items-center justify-content-center text-secondary'
+                    ? 'coinStat d-flex align-items-center justify-content-center text-danger'
+                    : 'coinStat d-flex align-items-center justify-content-center text-secondary'
               "
             >
               <i
+                :class="
+                  currencyDetails.market_data.price_change_percentage_24h > 0
+                    ? 'bx bxs-up-arrow'
+                    : currencyDetails.market_data.price_change_percentage_24h <
+                        0
+                      ? 'bx bxs-down-arrow'
+                      : 'bx bx-minus'
+                "
+              ></i>
+              <span class="mx-2"
+                >{{
+                  Math.abs(
+                    currencyDetails.market_data.price_change_percentage_24h,
+                  )
+                }}% (24h)</span
+              ></span
+            >
+          </div>
+          <div
+            class="d-flex justify-content-center gap-4 text-center mt-2 w-100"
+          >
+            <p class="fw-bolder mx-3">
+              All Time Low:
+              <span
+                >${{
+                  currencyDetails.market_data.atl.usd.toLocaleString('en-US')
+                }}
+                <br />
+                ({{
+                  new Date(
+                    currencyDetails.market_data.atl_date.usd,
+                  ).toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                }})</span
+              >
+              <span
                 :class="
                   currencyDetails.market_data.atl_change_percentage.usd > 0
-                    ? 'bx bxs-up-arrow'
+                    ? 'd-flex align-items-center justify-content-center text-success'
                     : currencyDetails.market_data.atl_change_percentage.usd < 0
-                      ? 'bx bxs-down-arrow'
-                      : 'bx bx-minus'
+                      ? 'd-flex align-items-center justify-content-center text-danger'
+                      : 'd-flex align-items-center justify-content-center text-secondary'
                 "
-              ></i>
-              <span class="mx-2"
-                >{{
-                  Math.abs(
-                    currencyDetails.market_data.atl_change_percentage.usd,
-                  )
-                }}%</span
-              ></span
-            >
-          </p>
-          <p class="fw-bolder mx-3">
-            All Time High:
-            <span
-              >${{
-                currencyDetails.market_data.ath.usd.toLocaleString('en-US')
-              }}
-              <br />
-              ({{
-                new Date(
-                  currencyDetails.market_data.ath_date.usd,
-                ).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                })
-              }})</span
-            ><span
-              :class="
-                currencyDetails.market_data.ath_change_percentage.usd > 0
-                  ? 'd-flex align-items-center justify-content-center text-success'
-                  : currencyDetails.market_data.ath_change_percentage.usd < 0
-                    ? 'd-flex align-items-center justify-content-center text-danger'
-                    : 'd-flex align-items-center justify-content-center text-secondary'
-              "
-            >
-              <i
+              >
+                <i
+                  :class="
+                    currencyDetails.market_data.atl_change_percentage.usd > 0
+                      ? 'bx bxs-up-arrow'
+                      : currencyDetails.market_data.atl_change_percentage.usd <
+                          0
+                        ? 'bx bxs-down-arrow'
+                        : 'bx bx-minus'
+                  "
+                ></i>
+                <span class="mx-2"
+                  >{{
+                    Math.abs(
+                      currencyDetails.market_data.atl_change_percentage.usd,
+                    )
+                  }}%</span
+                ></span
+              >
+            </p>
+            <p class="fw-bolder mx-3">
+              All Time High:
+              <span
+                >${{
+                  currencyDetails.market_data.ath.usd.toLocaleString('en-US')
+                }}
+                <br />
+                ({{
+                  new Date(
+                    currencyDetails.market_data.ath_date.usd,
+                  ).toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                }})</span
+              ><span
                 :class="
                   currencyDetails.market_data.ath_change_percentage.usd > 0
-                    ? 'bx bxs-up-arrow'
+                    ? 'd-flex align-items-center justify-content-center text-success'
                     : currencyDetails.market_data.ath_change_percentage.usd < 0
-                      ? 'bx bxs-down-arrow'
-                      : 'bx bx-minus'
+                      ? 'd-flex align-items-center justify-content-center text-danger'
+                      : 'd-flex align-items-center justify-content-center text-secondary'
                 "
-              ></i>
-              <span class="mx-2"
-                >{{
-                  Math.abs(
-                    currencyDetails.market_data.ath_change_percentage.usd,
-                  )
-                }}%</span
-              ></span
-            >
-          </p>
+              >
+                <i
+                  :class="
+                    currencyDetails.market_data.ath_change_percentage.usd > 0
+                      ? 'bx bxs-up-arrow'
+                      : currencyDetails.market_data.ath_change_percentage.usd <
+                          0
+                        ? 'bx bxs-down-arrow'
+                        : 'bx bx-minus'
+                  "
+                ></i>
+                <span class="mx-2"
+                  >{{
+                    Math.abs(
+                      currencyDetails.market_data.ath_change_percentage.usd,
+                    )
+                  }}%</span
+                ></span
+              >
+            </p>
+          </div>
         </div>
+        <nav class="nav my-3 nav-underline justify-content-evenly">
+          <a
+            class="nav-item nav-link link-body-emphasis active"
+            @click="changeNavTopic($event)"
+            >Market Data</a
+          ><a
+            class="nav-item nav-link cursor-pointer"
+            @click="changeNavTopic($event)"
+            >Coin Info</a
+          ><a
+            class="nav-item nav-link cursor-pointer"
+            @click="changeNavTopic($event)"
+            >Converter</a
+          >
+        </nav>
+        <CoinMarketData
+          :mode="mode"
+          :currency="currencyDetails"
+          v-if="navTopic == 'Market Data'"
+        />
+        <CoinInformation
+          :mode="mode"
+          :currency="currencyDetails"
+          v-if="navTopic == 'Coin Info'"
+        />
+        <CurrencyConverter
+          :mode="mode"
+          :currency="currencyDetails"
+          v-if="navTopic == 'Converter'"
+        />
+        <p class="w-100 text-center">
+          Porewed By
+          <a href="https://www.coingecko.com/" target="_blank">CoinGecko</a>
+        </p>
       </div>
-      <nav class="nav my-3 nav-underline justify-content-evenly">
-        <a
-          class="nav-item nav-link link-body-emphasis active"
-          @click="changeNavTopic($event)"
-          >Market Data</a
-        ><a
-          class="nav-item nav-link cursor-pointer"
-          @click="changeNavTopic($event)"
-          >Coin Info</a
-        ><a
-          class="nav-item nav-link cursor-pointer"
-          @click="changeNavTopic($event)"
-          >Converter</a
-        >
-      </nav>
-      <CoinMarketData
-        :mode="mode"
-        :currency="currencyDetails"
-        v-if="navTopic == 'Market Data'"
-      />
-      <CoinInformation
-        :mode="mode"
-        :currency="currencyDetails"
-        v-if="navTopic == 'Coin Info'"
-      />
-      <CurrencyConverter
-        :mode="mode"
-        :currency="currencyDetails"
-        v-if="navTopic == 'Converter'"
-      />
-      <p class="w-100 text-center">
-        Porewed By
-        <a href="https://www.coingecko.com/" target="_blank">CoinGecko</a>
-      </p>
     </section>
   </main>
 </template>
