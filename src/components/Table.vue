@@ -17,6 +17,7 @@
                   <th>Coin</th>
                   <th class="text-center">Price</th>
                   <th class="text-center">Market Cap</th>
+                  <th class="text-center">Trading Volume</th>
                   <th class="text-start">Price Change (24h)</th>
                 </tr>
               </thead>
@@ -45,6 +46,9 @@
                   </td>
                   <td class="border-bottom-0 text-center">
                     ${{ currency.market_cap.toLocaleString('en-US') }}
+                  </td>
+                  <td class="border-bottom-0 text-center">
+                    ${{ currency.total_volume.toLocaleString('en-US') }}
                   </td>
                   <td class="border-bottom-0 text-center">
                     <span

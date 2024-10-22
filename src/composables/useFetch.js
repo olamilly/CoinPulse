@@ -55,16 +55,15 @@ export function useFetch() {
     })
 
     fetch(
-      `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=1`,
+      `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7&interval=daily`,
       options,
     )
       .then(response => response.json())
       .then(response => {
         chartData.value.labels = response.prices.map(price =>
-          new Date(price[0]).toLocaleTimeString('en-US', {
-            hour12: false,
-            hour: 'numeric',
-            minute: 'numeric',
+          new Date(price[0]).toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'short',
           }),
         )
         chartData.value.datasets[0].data = response.prices.map(

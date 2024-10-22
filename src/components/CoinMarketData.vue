@@ -24,26 +24,26 @@
 
             <span
               :class="
-                currency.market_data.price_change_percentage_24h > 0
+                currency.market_data.price_change_percentage_7d > 0
                   ? 'd-flex align-items-center justify-content-center text-success'
-                  : currency.market_data.price_change_percentage_24h < 0
+                  : currency.market_data.price_change_percentage_7d < 0
                     ? 'd-flex align-items-center justify-content-center text-danger'
                     : 'd-flex align-items-center justify-content-center text-secondary'
               "
             >
               <i
                 :class="
-                  currency.market_data.price_change_percentage_24h > 0
+                  currency.market_data.price_change_percentage_7d > 0
                     ? 'bx bxs-up-arrow'
-                    : currency.market_data.price_change_percentage_24h < 0
+                    : currency.market_data.price_change_percentage_7d < 0
                       ? 'bx bxs-down-arrow'
                       : 'bx bx-minus'
                 "
               ></i>
               <span class="mx-2"
                 >{{
-                  Math.abs(currency.market_data.price_change_percentage_24h)
-                }}% (24h)</span
+                  Math.abs(currency.market_data.price_change_percentage_7d)
+                }}% (7d)</span
               ></span
             >
             <div class="d-flex flex-wrap justify-content-around">
@@ -67,7 +67,7 @@
                 <span
                   >{{
                     currency.market_data.max_supply
-                      ? `${currency.market_data.max_supply} ${currency.symbol.toUpperCase()}`
+                      ? `${currency.market_data.max_supply.toLocaleString('en-US')} ${currency.symbol.toUpperCase()}`
                       : '∞'
                   }}
                 </span>
@@ -122,7 +122,7 @@ const chartOptions = ref({
     legend: { display: false },
     title: {
       display: true,
-      text: `${props.currency.name} Price Change (24 hours)`,
+      text: `${props.currency.name} Price Change (7 days)`,
       color: 'gray',
       align: 'center',
       font: { weight: 'bold', size: 18 },
@@ -142,7 +142,7 @@ const chartOptions = ref({
         // For a category axis, the val is the index so the lookup via getLabelForValue is needed
         callback: function (val, index) {
           // Show every 5th tick label
-          return index % 5 === 0 ? this.getLabelForValue(val) : ''
+          return index % 2 === 0 ? this.getLabelForValue(val) : ''
         },
         color: 'gray',
       },

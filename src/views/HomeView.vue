@@ -55,6 +55,10 @@ const filterCurrenciesBySearchQuery = query => {
         </span>
       </h1>
       <TableComponent :mode="mode" :currencies="filteredCurrencies" />
+      <p class="w-100 text-center">
+        Porewed By
+        <a href="https://www.coingecko.com/" target="_blank">CoinGecko</a>
+      </p>
     </section>
   </main>
 </template>
