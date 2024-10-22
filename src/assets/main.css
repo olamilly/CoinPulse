@@ -1,0 +1,94 @@
+@import './base.css';
+* {
+  font-family: 'Outfit', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+h1,
+h3 {
+  font-family: 'Outfit', sans-serif !important;
+}
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  /* padding: 2rem; */
+  font-weight: normal;
+  overflow-x: hidden;
+}
+main {
+  padding: 1rem;
+  background-color: hsl(0, 0%, 98%);
+  box-shadow: inset 0 3px 0.3em rgba(0, 0, 0, 0.15);
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.bx {
+  font-size: 15px;
+}
+input.form-control {
+  box-shadow: 0 0 8px 0.2rem rgba(0, 0, 0, 0.1);
+}
+input.form-control:focus {
+  border-color: hsl(0, 0%, 100%) !important;
+  box-shadow: 0 0 8px 0.4rem rgba(0, 0, 0, 0.1);
+}
+.btn.show {
+  border-color: hsl(0, 0%, 100%) !important;
+}
+div.dropdown-menu > a {
+  font-size: 14px !important;
+}
+.btn {
+  box-shadow: 0 0 8px 0.1rem rgba(0, 0, 0, 0.1);
+  background-color: hsl(0, 0%, 100%);
+}
+.text-end {
+  cursor: pointer;
+}
+.btn.dark,
+input.dark,
+input.dark:focus,
+.dropdown-menu.dark,
+.card.dark {
+  background-color: hsl(209, 23%, 22%);
+  color: white !important;
+  outline: none;
+}
+main.dark,
+.header-end.dark {
+  background-color: hsl(200, 15%, 8%) !important;
+  color: white !important;
+}
+.dropdown-menu.dark > .dropdown-item {
+  color: white;
+}
+input.dark,
+input.dark:focus,
+.btn.show.dark {
+  border-color: hsl(209, 23%, 22%) !important;
+}
+input.dark::placeholder {
+  color: lightgray;
+}
+main {
+  min-height: calc(100vh - 50px);
+}
+.details > .btn:hover,
+.header-end:hover {
+  transform: translateY(-3px);
+}
+.brand-name {
+  font-family: 'Orbitron', serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.7rem;
+}
+.branded-text {
+  /* font-family: 'Orbitron', serif; */
+  /* font-size: 3rem; */
+  font-weight: 200;
+}
