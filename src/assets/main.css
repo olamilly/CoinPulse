@@ -92,3 +92,9 @@ main {
   /* font-size: 3rem; */
   font-weight: 200;
 }
+main.dark h1 {
+  color: white !important;
+}
+main.dark h3 {
+  color: white !important;
+}
