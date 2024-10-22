@@ -1,35 +1,15 @@
 # CoinPulse
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+InternPulse Internship Task 3: Build a Cryptocurrency Dashboard Tracker App
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Customize configuration
+## CoinPulse is a simple user-friendly cryptocurrency dashboard tracker app that allows people to monitor the prices and trends of various cryptocurrencies in real-time built with Vue 3.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## Features:
+- Cryptocurrency Search: A search bar that allows users to search for specific cryptocurrencies by name or symbol.
+- Cryptocurrency details Display: Users can view the current price, 24-hour price change, market cap, trading volume and a lot of infromation for all cryptocurrencies. 
+- API: Integrated CoinGecko API to fetch the data.
+- Price Chart: Display a line chart that shows the price trend of a selected cryptocurrency over the past week.
 
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
