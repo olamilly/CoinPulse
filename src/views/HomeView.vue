@@ -17,7 +17,10 @@ const filterCurrenciesBySearchQuery = query => {
     filteredCurrencies.value = allCurrencies.value
   } else {
     filteredCurrencies.value = allCurrencies.value.filter(function (c) {
-      return c.name.toLowerCase().includes(query.toLowerCase())
+      return (
+        c.name.toLowerCase().includes(query.toLowerCase()) ||
+        c.symbol.includes(query.toLowerCase())
+      )
     })
   }
 }
