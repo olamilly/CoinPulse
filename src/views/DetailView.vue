@@ -39,7 +39,7 @@ function changeNavTopic(e) {
 }
 </script>
 <template>
-  <main :class="mode === 'dark' ? 'details dark' : 'details'">
+  <main :class="mode === 'dark' ? 'details dark' : 'details light'">
     <div
       v-if="currencyDetails"
       :class="
